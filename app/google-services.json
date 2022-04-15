@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "770967665997",
+    "firebase_url": "https://superapp-724c2-default-rtdb.firebaseio.com",
+    "project_id": "superapp-724c2",
+    "storage_bucket": "superapp-724c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:770967665997:android:3d7f18b79ed8e9d9674b04",
+        "android_client_info": {
+          "package_name": "edu.uga.cs.superapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "770967665997-d7k9m62s3r30eg54l41fmsa21ojfvoof.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBb-d8v6q9lW8D_9cp-m1FayR_i3JoSUyo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "770967665997-d7k9m62s3r30eg54l41fmsa21ojfvoof.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

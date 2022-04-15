@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/layout/activity_main_screen_management.xml" value="0.2242965698242187" />
+        <entry key="app/src/main/res/layout/activity_new_grocery_item.xml" value="0.2055252075195312" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.1939498901367187" />
+        <entry key="app/src/main/res/layout/activity_review_grocery_list.xml" value="0.16402282714843752" />
+        <entry key="app/src/main/res/layout/add_grocery_item_dialog.xml" value="0.33619995117187496" />
+        <entry key="app/src/main/res/layout/grocery_item.xml" value="0.44182343072636543" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
