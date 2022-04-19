@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         signInButton.setOnClickListener( new SignInButtonClickListener() );
         registerButton.setOnClickListener( new RegisterButtonClickListener() );
+
     }
 
     // A button listener class to start a Firebase sign-in process
