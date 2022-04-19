@@ -44,7 +44,7 @@ public class AddGroceryItemDialogFragment extends DialogFragment{
 //        commentsView = layout.findViewById( R.id.editText4 );
 
         // create a new AlertDialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogStyle);  //Todo: create a style for this or find a new one. May have done something weird when creating this
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()); //, R.style.AlertDialogStyle //Todo: create a style for this or find a new one. May have done something weird when creating this
         // Set its view (inflated above).
         builder.setView(layout);
 

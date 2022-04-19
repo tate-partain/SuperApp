@@ -104,7 +104,7 @@ public class ReviewGroceryListActivity
         // add the new item
         // Add a new element (GroceryItem) to the list of items in Firebase.
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("GroceryList"); //Todo: find out what mine is called or set it
+        DatabaseReference myRef = database.getReference("GroceryList");
 
         // First, a call to push() appends a new node to the existing list (one is created
         // if this is done for the first time).  Then, we set the value in the newly created

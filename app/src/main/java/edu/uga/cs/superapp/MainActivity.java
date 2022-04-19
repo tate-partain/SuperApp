@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
             Log.d( DEBUG_TAG, "MainActivity.SignInButtonClickListener: Signing in started" );
 
             // Create an Intent to singin to Firebese.
-            //Todo: fix this error message:    java.lang.IllegalStateException: Default FirebaseApp is not initialized in this process edu.uga.cs.superapp. Make sure to call FirebaseApp.initializeApp(Context) first.
             Intent signInIntent = AuthUI.getInstance()
                     .createSignInIntentBuilder()
                     .setAvailableProviders(providers)
@@ -101,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             //Log.d( DEBUG_TAG, "MainActivity.onSignInResult: Signed in as: " + user.getEmail() );
 
             // after a successful sign in, start the job leads management activity
-            Intent intent = new Intent( this, MainScreenManagerActivity.class ); //Todo: check if MainScreen... is what is supposed to be here. Might need to be something else
+            Intent intent = new Intent( this, MainScreenManagerActivity.class );
             startActivity( intent );
         }
         else {
