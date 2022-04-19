@@ -27,7 +27,7 @@ public class GroceryListRecyclerAdapter extends RecyclerView.Adapter<GroceryList
 
         TextView itemName;
         TextView price;
-//        TextView url;
+        TextView quantity;
 //        TextView comments;
 
         public GroceryListHolder(View itemView ) {
@@ -35,7 +35,7 @@ public class GroceryListRecyclerAdapter extends RecyclerView.Adapter<GroceryList
 
             itemName = (TextView) itemView.findViewById( R.id.itemName );
             price = (TextView) itemView.findViewById( R.id.price );
-//            url = (TextView) itemView.findViewById( R.id.url );
+            quantity = (TextView) itemView.findViewById( R.id.quantity );
 //            comments = (TextView) itemView.findViewById( R.id.comments );
         }
     }
@@ -55,7 +55,7 @@ public class GroceryListRecyclerAdapter extends RecyclerView.Adapter<GroceryList
 
         holder.itemName.setText( groceryItem.getItemName());
         holder.price.setText( groceryItem.getPrice() );
-//        holder.url.setText( jobLead.getUrl() );
+        holder.quantity.setText( groceryItem.getQuantity() );
 //        holder.comments.setText( jobLead.getComments() );
     }
 
