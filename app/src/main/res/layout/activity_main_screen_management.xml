@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".JobLeadManagementActivity">
+    tools:context=".MainScreenManagerActivity">
 
     <Button
         android:id="@+id/button1"
@@ -15,7 +15,7 @@
         android:layout_marginTop="64dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
-        android:text="Enter new job lead"
+        android:text="Add new item"
         android:textAllCaps="false"
         app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +31,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:padding="10dp"
-        android:text="You can add a new job lead or view your current leads"
+        android:text="You can add a new item or view your current lists"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +46,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
-        android:text="View job leads"
+        android:text="View your lists"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
