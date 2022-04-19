@@ -8,23 +8,20 @@ package edu.uga.cs.superapp;
 public class GroceryItem {
     private String itemName;
     private String price;
-//    might want a "purchased" boolean or "purchasedBy" String
-//    private String url;
-//    private String comments;
+    private String quantity;
+    private String purchasedBy;
 
-    public GroceryItem()
-    {
+    public GroceryItem() {
         this.itemName = null;
         this.price = null;
-//        this.url = null;
-//        this.comments = null;
+        this.quantity = null;
+        this.purchasedBy = null;
     }
 
-    public GroceryItem( String itemName, String price ) {
+    public GroceryItem( String itemName, String price, String quantity ) {
         this.itemName = itemName;
         this.price = price;
-//        this.url = url;
-//        this.comments = comments;
+        this.quantity = quantity;
     }
 
     public String getItemName() {
@@ -43,23 +40,13 @@ public class GroceryItem {
         this.price = price;
     }
 
-//    public String getUrl() {
-//        return url;
-//    }
-//
-//    public void setUrl(String url) {
-//        this.url = url;
-//    }
-//
-//    public String getComments() {
-//        return comments;
-//    }
-//
-//    public void setComments(String comments) {
-//        this.comments = comments;
-//    }
+    public String getQuantity() { return quantity; }
 
-    public String toString() {
-        return itemName + " " + price;
-    }
+    public void setQuantity(String quantity) { this.quantity = quantity; }
+
+    public String getPurchasedBy() { return purchasedBy; }
+
+    public void setPurchasedBy(String purchasedBy) { this.purchasedBy = purchasedBy; }
+
+    public String toString() { return itemName + " " + price + " " + quantity; }
 }

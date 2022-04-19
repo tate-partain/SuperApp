@@ -24,7 +24,7 @@ public class NewGroceryItemActivity extends AppCompatActivity{
 
     private EditText itemNameView;
     private EditText priceView;
-//    private EditText urlView;
+    private EditText quantityView;
 //    private EditText commentsView;
     private Button saveButton;
 
@@ -35,7 +35,7 @@ public class NewGroceryItemActivity extends AppCompatActivity{
 
         itemNameView = (EditText) findViewById( R.id.editText1 );
         priceView = (EditText) findViewById( R.id.editText2 );
-//        urlView = (EditText) findViewById( R.id.editText3 );
+        quantityView = (EditText) findViewById( R.id.editText3 );
 //        commentsView = (EditText) findViewById( R.id.editText4 );
         saveButton = (Button) findViewById( R.id.button );
 
@@ -45,15 +45,16 @@ public class NewGroceryItemActivity extends AppCompatActivity{
     private class ButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            String companyName = itemNameView.getText().toString();
-            String phone = priceView.getText().toString();
+            String itemName = itemNameView.getText().toString();
+            String price = priceView.getText().toString();
+            String quantity = quantityView.getText().toString();
 //            String url = urlView.getText().toString();
 //            String comments = commentsView.getText().toString();
-            final GroceryItem groceryItem = new GroceryItem( companyName, phone);
+            final GroceryItem groceryItem = new GroceryItem( itemName, price, quantity);
 
             // Add a new element (GroceryItem) to the list of items in Firebase.
             FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference myRef = database.getReference("jobleads");
+            DatabaseReference myRef = database.getReference("GroceryList");
 
             // First, a call to push() appends a new node to the existing list (one is created
             // if this is done for the first time).  Then, we set the value in the newly created
@@ -65,20 +66,20 @@ public class NewGroceryItemActivity extends AppCompatActivity{
                         @Override
                         public void onSuccess(Void aVoid) {
                             // Show a quick confirmation
-                            Toast.makeText(getApplicationContext(), "Job lead created for " + groceryItem.getItemName(),
+                            Toast.makeText(getApplicationContext(), "Grocery item created for " + groceryItem.getItemName(),
                                     Toast.LENGTH_SHORT).show();
 
                             // Clear the EditTexts for next use.
                             itemNameView.setText("");
                             priceView.setText("");
-//                            urlView.setText("");
+                            quantityView.setText("");
 //                            commentsView.setText("");
                         }
                     })
                     .addOnFailureListener( new OnFailureListener() {
                         @Override
                         public void onFailure(Exception e) {
-                            Toast.makeText( getApplicationContext(), "Failed to create a Job lead for " + groceryItem.getItemName(),
+                            Toast.makeText( getApplicationContext(), "Failed to create a grocery item for " + groceryItem.getItemName(),
                                     Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -87,38 +88,38 @@ public class NewGroceryItemActivity extends AppCompatActivity{
 
     @Override
     protected void onResume() {
-        Log.d( DEBUG_TAG, "NewJobLeadActivity.onResume()" );
+        Log.d( DEBUG_TAG, "NewGroceryItemActivity.onResume()" );
         super.onResume();
     }
 
     @Override
     protected void onPause() {
-        Log.d( DEBUG_TAG, "NewJobLeadActivity.onPause()" );
+        Log.d( DEBUG_TAG, "NewGroceryItemActivity.onPause()" );
         super.onPause();
     }
 
     // The following activity callback methods are not needed and are for educational purposes only
     @Override
     protected void onStart() {
-        Log.d( DEBUG_TAG, "NewJobLeadActivity.onStart()" );
+        Log.d( DEBUG_TAG, "NewGroceryItemActivity.onStart()" );
         super.onStart();
     }
 
     @Override
     protected void onStop() {
-        Log.d( DEBUG_TAG, "NewJobLeadActivity.onStop()" );
+        Log.d( DEBUG_TAG, "NewGroceryItemActivity.onStop()" );
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        Log.d( DEBUG_TAG, "NewJobLeadActivity.onDestroy()" );
+        Log.d( DEBUG_TAG, "NewGroceryItemActivity.onDestroy()" );
         super.onDestroy();
     }
 
     @Override
     protected void onRestart() {
-        Log.d( DEBUG_TAG, "NewJobLeadActivity.onRestart()" );
+        Log.d( DEBUG_TAG, "NewGroceryItemActivity.onRestart()" );
         super.onRestart();
     }
 }

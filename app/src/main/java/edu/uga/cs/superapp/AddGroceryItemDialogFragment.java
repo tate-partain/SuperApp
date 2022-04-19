@@ -18,7 +18,7 @@ public class AddGroceryItemDialogFragment extends DialogFragment{
 
     private EditText itemNameView;
     private EditText priceView;
-//    private EditText urlView;
+    private EditText quantityView;
 //    private EditText commentsView;
 
     // This interface will be used to obtain the new grocery item from an AlertDialog.
@@ -38,6 +38,8 @@ public class AddGroceryItemDialogFragment extends DialogFragment{
         // get the view objects in the AlertDialog
         itemNameView = layout.findViewById( R.id.editText1 );
         priceView = layout.findViewById( R.id.editText2 );
+        quantityView = layout.findViewById( R.id.editText4);
+
 //        urlView = layout.findViewById( R.id.editText3 );
 //        commentsView = layout.findViewById( R.id.editText4 );
 
@@ -68,9 +70,11 @@ public class AddGroceryItemDialogFragment extends DialogFragment{
         public void onClick(DialogInterface dialog, int which) {
             String itemName = itemNameView.getText().toString();
             String price = priceView.getText().toString();
+            String quantity = quantityView.getText().toString();
+
 //            String url = urlView.getText().toString();
 //            String comments = commentsView.getText().toString();
-            GroceryItem groceryItem = new GroceryItem( itemName, price);
+            GroceryItem groceryItem = new GroceryItem( itemName, price, quantity);
 
             // get the Activity's listener to add the new job lead
             AddGroceryItemDialogListener listener = (AddGroceryItemDialogListener) getActivity();
