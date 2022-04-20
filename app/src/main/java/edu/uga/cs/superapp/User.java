@@ -11,17 +11,34 @@ import android.os.Bundle;
 
 
 public class User {
+    private static User user = null;
     private String userName;
+    private String uid;
     private double amountPaid;
 
-    public User() {
+    private User() {
         this.userName = "";
+        this.uid = "";
         this.amountPaid = 0;
     }
 
-    public User(String userName, double amountPaid) {
+    private User(String uid, String userName, double amountPaid) {
         this.userName = userName;
         this.amountPaid = amountPaid;
+    }
+
+    public static User getInstance() {
+        if (user == null) {
+            user = new User();
+        }
+        return user;
+    }
+
+    public static User getInstance(String uid, String userName) {
+        if (user == null) {
+            user = new User(uid, userName, 0);
+        }
+        return user;
     }
 
     public String getUserName() {
@@ -40,9 +57,11 @@ public class User {
         this.amountPaid += amountPaid;
     }
 
-    public void settledAmountPaid() {
-        amountPaid = 0;
-    }
+    public void settledAmountPaid() { amountPaid = 0; }
+
+    public void setUid(String uid) {this.uid = uid; }
+
+    public String getUid() { return uid; }
 
     public String toString() {
         return userName + " " + amountPaid;

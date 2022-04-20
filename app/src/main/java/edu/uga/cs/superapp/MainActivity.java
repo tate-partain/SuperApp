@@ -19,6 +19,9 @@ import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -96,7 +99,16 @@ public class MainActivity extends AppCompatActivity {
             if( response != null ) {
                 Log.d( DEBUG_TAG, "MainActivity.onSignInResult: response.getEmail(): " + response.getEmail() );
             }
+            final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+            FirebaseUser user = firebaseAuth.getCurrentUser();
 
+            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+//            mDatabase.child("users").child(user.getUid()).setValue(displayName);
+
+            User newUser = User.getInstance();
+            newUser.setUid(user.getUid());
+//            String username = mDatabase.child("users").child(user.getUid()).get  //Todo: fix this
+//            newUser.setUserName(mDatabase.child("users").child(user.getUid()).get());
             //Log.d( DEBUG_TAG, "MainActivity.onSignInResult: Signed in as: " + user.getEmail() );
 
             // after a successful sign in, start the job leads management activity
