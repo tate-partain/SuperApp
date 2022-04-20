@@ -16,14 +16,18 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
 
     private static final String DEBUG_TAG = "RegisterActivity";
 
     private EditText emailEditText;
-    private EditText passworEditText;
+    private EditText passwordEditText;
+    private EditText displayNameText;
     private Button registerButton;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +35,9 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         emailEditText = (EditText) findViewById( R.id.editText );
-        passworEditText = (EditText) findViewById( R.id.editText5 );
+        passwordEditText = (EditText) findViewById( R.id.editText5 );
+        displayNameText = (EditText) findViewById(R.id.displayNameEditText);
+
 
         registerButton = (Button) findViewById( R.id.button3 );
         registerButton.setOnClickListener( new RegisterButtonClickListener() );
@@ -41,7 +47,8 @@ public class RegisterActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             final String email = emailEditText.getText().toString();
-            final String password = passworEditText.getText().toString();
+            final String password = passwordEditText.getText().toString();
+            final String displayName = displayNameText.getText().toString();
 
             final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
@@ -65,6 +72,9 @@ public class RegisterActivity extends AppCompatActivity {
                                 Log.d( DEBUG_TAG, "createUserWithEmail: success" );
 
                                 FirebaseUser user = firebaseAuth.getCurrentUser();
+
+                                mDatabase = FirebaseDatabase.getInstance().getReference();
+                                mDatabase.child("users").child(user.getUid()).setValue(displayName);
 
                                 Intent intent = new Intent( RegisterActivity.this, MainScreenManagerActivity.class );
                                 startActivity( intent );
