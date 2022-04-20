@@ -5,8 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 /**
- * This class represents a single job lead, including the company name,
- * phone number, URL, and some comments.
+ * This class represents a single user of the app, including the person's name,
+ * and amount paid.
  */
 
 
@@ -36,8 +36,12 @@ public class User {
         return amountPaid;
     }
 
-    public void setAmountPaid(double amountPaid) {
-        this.amountPaid = amountPaid;
+    public void addAmountPaid(double amountPaid) {
+        this.amountPaid += amountPaid;
+    }
+
+    public void settledAmountPaid() {
+        amountPaid = 0;
     }
 
     public String toString() {
