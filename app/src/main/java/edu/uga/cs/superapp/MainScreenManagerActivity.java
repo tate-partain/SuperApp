@@ -20,6 +20,7 @@ public class MainScreenManagerActivity extends AppCompatActivity{
     private Button addItemButton;
     private Button reviewListButton;
     private TextView signedInTextView;
+    private Button signOutButton;
 
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
@@ -29,14 +30,16 @@ public class MainScreenManagerActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen_management);
 
-        Log.d( DEBUG_TAG, "JobLeadManagementActivity.onCreate()" );
+        Log.d( DEBUG_TAG, "MainScreenManagerActivity.onCreate()" );
 
         addItemButton = findViewById( R.id.button1 );
         reviewListButton = findViewById( R.id.button2 );
         signedInTextView = findViewById( R.id.textView3 );
+        signOutButton = findViewById(R.id.signOutButton);
 
         addItemButton.setOnClickListener( new AddItemButtonClickListener() );
         reviewListButton.setOnClickListener( new ReviewListButtonClickListener() );
+        signOutButton.setOnClickListener(new SignOutButtonClickListener());
 
         // Setup a listener for a change in the sign in status (authentication status change)
         // when it is invoked, check if a user is signed in and update the UI text view string,
@@ -54,7 +57,6 @@ public class MainScreenManagerActivity extends AppCompatActivity{
                     // User is signed out
                     Log.d( DEBUG_TAG, "onAuthStateChanged:signed_out" );
                     signedInTextView.setText( "Signed in as: not signed in" );
-                    //Todo: direct them to the main screen and prevent them from going back!!!!!!
                 }
             }
         });
@@ -76,40 +78,50 @@ public class MainScreenManagerActivity extends AppCompatActivity{
         }
     }
 
-    // These activity callback methods are not needed and are for edational purposes only
+    private class SignOutButtonClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(view.getContext(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);//Todo: make sure this prohibits the user from going back but also works
+            view.getContext().startActivity(intent);
+        }
+    }
+
+    // These activity callback methods are not needed and are for educational purposes only
     @Override
     protected void onStart() {
-        Log.d( DEBUG_TAG, "JobLead: ManagementActivity.onStart()" );
+        Log.d( DEBUG_TAG, "MainScreenManagerActivity.onStart()" );
         super.onStart();
     }
 
     @Override
     protected void onResume() {
-        Log.d( DEBUG_TAG, "JobLead: ManagementActivity.onResume()" );
+        Log.d( DEBUG_TAG, "MainScreenManagerActivity.onResume()" );
         super.onResume();
     }
 
     @Override
     protected void onPause() {
-        Log.d( DEBUG_TAG, "JobLead: ManagementActivity.onPause()" );
+        Log.d( DEBUG_TAG, "MainScreenManagerActivity.onPause()" );
         super.onPause();
     }
 
     @Override
     protected void onStop() {
-        Log.d( DEBUG_TAG, "JobLead: ManagementActivity.onStop()" );
+        Log.d( DEBUG_TAG, "MainScreenManagerActivity.onStop()" );
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        Log.d( DEBUG_TAG, "JobLead: ManagementActivity.onDestroy()" );
+        Log.d( DEBUG_TAG, "MainScreenManagerActivity.onDestroy()" );
         super.onDestroy();
     }
 
     @Override
     protected void onRestart() {
-        Log.d( DEBUG_TAG, "JobLead: ManagementActivity.onRestart()" );
+        Log.d( DEBUG_TAG, "MainScreenManagerActivity.onRestart()" );
         super.onRestart();
     }
 }
