@@ -43,6 +43,15 @@
                 android:value="edu.uga.cs.superapp.ReviewGroceryListActivity" />
         </activity>
         <activity
+            android:name=".ReviewCartActivity"
+            android:parentActivityName=".MainScreenManagerActivity">
+
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.uga.cs.superapp.ReviewCartActivity" />
+        </activity>
+        <activity
             android:name=".MainScreenManagerActivity"
             android:parentActivityName=".MainActivity" />
         <activity

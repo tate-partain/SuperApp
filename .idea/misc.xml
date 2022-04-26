@@ -4,13 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.16769256591796877" />
-        <entry key="app/src/main/res/layout/activity_main_screen_management.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_main_screen_management.xml" value="0.23421997070312503" />
         <entry key="app/src/main/res/layout/activity_new_grocery_item.xml" value="0.2055252075195312" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.1939498901367187" />
+        <entry key="app/src/main/res/layout/activity_review_cart.xml" value="0.18578643798828126" />
         <entry key="app/src/main/res/layout/activity_review_grocery_list.xml" value="0.16402282714843752" />
         <entry key="app/src/main/res/layout/activity_settle_up.xml" value="0.1822509765624999" />
         <entry key="app/src/main/res/layout/add_grocery_item_dialog.xml" value="0.19665222167968743" />
-        <entry key="app/src/main/res/layout/grocery_item.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/grocery_item.xml" value="0.23147430419921877" />
       </map>
     </option>
   </component>

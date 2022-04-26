@@ -21,6 +21,7 @@ public class MainScreenManagerActivity extends AppCompatActivity{
     private Button reviewListButton;
     private TextView signedInTextView;
     private Button signOutButton;
+    private Button viewCartButton;
 
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
@@ -36,10 +37,12 @@ public class MainScreenManagerActivity extends AppCompatActivity{
         reviewListButton = findViewById( R.id.button2 );
         signedInTextView = findViewById( R.id.textView3 );
         signOutButton = findViewById(R.id.signOutButton);
+        viewCartButton = findViewById(R.id.button4);
 
         addItemButton.setOnClickListener( new AddItemButtonClickListener() );
         reviewListButton.setOnClickListener( new ReviewListButtonClickListener() );
         signOutButton.setOnClickListener(new SignOutButtonClickListener());
+        viewCartButton.setOnClickListener(new ReviewCartButtonClickListener());
 
         // Setup a listener for a change in the sign in status (authentication status change)
         // when it is invoked, check if a user is signed in and update the UI text view string,
@@ -74,6 +77,14 @@ public class MainScreenManagerActivity extends AppCompatActivity{
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(view.getContext(), ReviewGroceryListActivity.class);
+            view.getContext().startActivity(intent);
+        }
+    }
+
+    private class ReviewCartButtonClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(view.getContext(), ReviewCartActivity.class);
             view.getContext().startActivity(intent);
         }
     }
