@@ -17,7 +17,6 @@ import com.google.firebase.database.FirebaseDatabase;
 /**
  * This class is an activity to add an item to the grocery list.
  */
-
 public class NewGroceryItemActivity extends AppCompatActivity{
 
     public static final String DEBUG_TAG = "NewGroceryItemActivity";
@@ -55,7 +54,6 @@ public class NewGroceryItemActivity extends AppCompatActivity{
             // Add a new element (GroceryItem) to the list of items in Firebase.
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference myRef = database.getReference("GroceryList");
-
             // First, a call to push() appends a new node to the existing list (one is created
             // if this is done for the first time).  Then, we set the value in the newly created
             // list node to store the new grocery item.

@@ -1,5 +1,7 @@
 package edu.uga.cs.superapp;
 
+import com.google.firebase.database.Exclude;
+
 /**
  * This class represents a single job lead, including the company name,
  * phone number, URL, and some comments.

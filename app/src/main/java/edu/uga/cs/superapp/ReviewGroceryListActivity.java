@@ -3,6 +3,7 @@ package edu.uga.cs.superapp;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,7 +37,7 @@ public class ReviewGroceryListActivity
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter recyclerAdapter;
-
+    private ListView listView;
     private List<GroceryItem> groceryList;
 
     @Override
@@ -46,7 +47,8 @@ public class ReviewGroceryListActivity
 
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_review_grocery_list );
-
+        //listView = findViewById(R.id.list_view);
+        groceryList = new ArrayList<GroceryItem>();
         recyclerView = (RecyclerView) findViewById( R.id.recyclerView );
 
         FloatingActionButton floatingButton = findViewById(R.id.floatingActionButton);
@@ -60,12 +62,12 @@ public class ReviewGroceryListActivity
         // use a linear layout manager for the recycler view
         layoutManager = new LinearLayoutManager(this );
         recyclerView.setLayoutManager( layoutManager );
+        recyclerAdapter = new GroceryListRecyclerAdapter( groceryList );
+        recyclerView.setAdapter( recyclerAdapter );
 
         // get a Firebase DB instance reference
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("GroceryList");
-
-        groceryList = new ArrayList<GroceryItem>();
 
         // Set up a listener (event handler) to receive a value for the database reference, but only one time.
         // This type of listener is called by Firebase once by immediately executing its onDataChange method.
@@ -80,6 +82,8 @@ public class ReviewGroceryListActivity
             public void onDataChange( DataSnapshot snapshot ) {
                 // Once we have a DataSnapshot object, knowing that this is a list,
                 // we need to iterate over the elements and place them on a List.
+//                showData(snapshot);
+                // Now, create a JobLeadRecyclerAdapter to populate a ReceyclerView to display the job leads.
                 for( DataSnapshot postSnapshot: snapshot.getChildren() ) {
                     GroceryItem groceryItem = postSnapshot.getValue(GroceryItem.class);
                     groceryList.add(groceryItem);
@@ -87,17 +91,31 @@ public class ReviewGroceryListActivity
                 }
                 Log.d( DEBUG_TAG, "ReviewGroceryListActivity.onCreate(): setting recyclerAdapter" );
 
-                // Now, create a JobLeadRecyclerAdapter to populate a ReceyclerView to display the job leads.
                 recyclerAdapter = new GroceryListRecyclerAdapter( groceryList );
                 recyclerView.setAdapter( recyclerAdapter );
             }
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getMessage());
             }
+
+
         } );
     }
+
+//    private void showData(DataSnapshot snapshot) {
+//        for (DataSnapshot post : snapshot.getChildren()) {
+//            GroceryItem items = post.getValue(GroceryItem.class);
+//            groceryList.add(items);
+//            Log.d( DEBUG_TAG, "ReviewGroceryListActivity.onCreate(): added: " + items );
+//            Log.d( DEBUG_TAG, "ReviewGroceryListActivity.onCreate(): setting recyclerAdapter" );
+//            recyclerAdapter = new GroceryListRecyclerAdapter( groceryList );
+//            recyclerView.setAdapter( recyclerAdapter );
+//
+//        }
+//    }
 
     // this is our own callback for a DialogFragment which adds a new grocery item.
     public void onFinishNewGroceryItemDialog(GroceryItem groceryItem) {
@@ -105,7 +123,7 @@ public class ReviewGroceryListActivity
         // Add a new element (GroceryItem) to the list of items in Firebase.
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("GroceryList");
-
+        ///int itemId = groceryList.size();
         // First, a call to push() appends a new node to the existing list (one is created
         // if this is done for the first time).  Then, we set the value in the newly created
         // list node to store the new grocery item.
