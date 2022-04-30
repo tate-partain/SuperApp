@@ -71,12 +71,12 @@ public class RegisterActivity extends AppCompatActivity {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d( DEBUG_TAG, "createUserWithEmail: success" );
 
-                                FirebaseUser user = firebaseAuth.getCurrentUser();
+//                                FirebaseUser user = firebaseAuth.getCurrentUser();
+//
+//                                mDatabase = FirebaseDatabase.getInstance().getReference();
+//                                mDatabase.child("users").child(user.getUid()).setValue(displayName);
 
-                                mDatabase = FirebaseDatabase.getInstance().getReference();
-                                mDatabase.child("users").child(user.getUid()).setValue(displayName);
-
-                                User newUser = User.getInstance(user.getUid(), displayName);
+//                                User newUser = User.getInstance(user.getUid(), displayName); //Todo: get rid of if you can
 
                                 Intent intent = new Intent( RegisterActivity.this, MainScreenManagerActivity.class );
                                 startActivity( intent );

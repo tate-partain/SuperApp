@@ -6,12 +6,23 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainScreenManagerActivity extends AppCompatActivity{
 
@@ -25,9 +36,13 @@ public class MainScreenManagerActivity extends AppCompatActivity{
 
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
+    private List<User> userList;
+    private User user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        userList = new ArrayList<User>();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen_management);
 
@@ -43,6 +58,65 @@ public class MainScreenManagerActivity extends AppCompatActivity{
         reviewListButton.setOnClickListener( new ReviewListButtonClickListener() );
         signOutButton.setOnClickListener(new SignOutButtonClickListener());
         viewCartButton.setOnClickListener(new ReviewCartButtonClickListener());
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("users");
+        myRef.addListenerForSingleValueEvent( new ValueEventListener() {
+            @Override
+            public void onDataChange( DataSnapshot snapshot ) {
+//                showData(snapshot);
+                for( DataSnapshot postSnapshot: snapshot.getChildren() ) { //Todo: determine if .child("users") works and is needed
+                    User singleUser = postSnapshot.getValue(User.class);
+                    userList.add(singleUser);
+                    Log.d( DEBUG_TAG, "MainScreenManagerActivity.onCreate(): added user to list");
+                }
+                //top
+                currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                if (currentUser != null) {
+                    boolean isUser = false;
+                    try {
+                        for (int i = 0; i < userList.size(); i++) {
+                            if ((currentUser.getUid()).equals((userList.get(i)).getId())) {
+                                isUser = true;
+                                user = userList.get(i);
+                                Log.d(DEBUG_TAG, "Previous user id found. No new user to be created.");
+                                break;
+                            }
+                        }
+                    } catch(Exception e) {
+                        //keep going. isUser is already set properly
+                    }
+                    if (isUser == false) { //no user with the current users uid (new user)
+                        Log.d(DEBUG_TAG, "No user with specified UID found. Creating new user");
+                        User newUser = new User(currentUser.getUid(), 0);
+                        myRef.push().setValue( newUser )
+                                .addOnSuccessListener( new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        // Show a quick confirmation
+                                        Toast.makeText(getApplicationContext(), "New user created ",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .addOnFailureListener( new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(Exception e) {
+                                        Toast.makeText( getApplicationContext(), "Failed to create new user",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }
+                } else {
+                    Log.d(DEBUG_TAG, "Error getting current user."); //Todo: may want to add a handler for this error
+                    // No user is signed in
+                }
+                //bottom
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getMessage());
+            }
+        } );
 
         // Setup a listener for a change in the sign in status (authentication status change)
         // when it is invoked, check if a user is signed in and update the UI text view string,

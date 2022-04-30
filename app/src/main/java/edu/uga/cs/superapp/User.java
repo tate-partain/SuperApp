@@ -11,60 +11,37 @@ import android.os.Bundle;
 
 
 public class User {
-    private static User user = null;
-    private String userName;
-    private String uid;
-    private double amountPaid;
+    private static String id;
+    private static double amount;
 
-    private User() {
-        this.userName = "";
-        this.uid = "";
-        this.amountPaid = 0;
+    public User() {
+        id = null;
+        amount = 0;
     }
 
-    private User(String uid, String userName, double amountPaid) {
-        this.userName = userName;
-        this.amountPaid = amountPaid;
+    public User(String id, double amountPaid) {
+        this.id = id;
+        this.amount = amountPaid;
     }
 
-    public static User getInstance() {
-        if (user == null) {
-            user = new User();
-        }
-        return user;
+    public double getAmount() {
+        return amount;
     }
 
-    public static User getInstance(String uid, String userName) {
-        if (user == null) {
-            user = new User(uid, userName, 0);
-        }
-        return user;
+    public void setAmount(double amountPaid) { this.amount = amountPaid; }
+
+    public void addAmount(double amountPaid) {
+        this.amount += amountPaid;
     }
 
-    public String getUserName() {
-        return userName;
-    }
+    public void resetAmount() { amount = 0; }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+    public void setId(String id) {this.id = id; }
 
-    public double getAmountPaid() {
-        return amountPaid;
-    }
-
-    public void addAmountPaid(double amountPaid) {
-        this.amountPaid += amountPaid;
-    }
-
-    public void settledAmountPaid() { amountPaid = 0; }
-
-    public void setUid(String uid) {this.uid = uid; }
-
-    public String getUid() { return uid; }
+    public String getId() { return id; }
 
     public String toString() {
-        return userName + " " + amountPaid;
+        return id + " value: " + amount;
     }
 
 }

@@ -103,13 +103,13 @@ public class MainActivity extends AppCompatActivity {
             FirebaseUser user = firebaseAuth.getCurrentUser();
 
             DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-//            mDatabase.child("users").child(user.getUid()).setValue(displayName);
-
-            User newUser = User.getInstance();
-            newUser.setUid(user.getUid());
-//            String username = mDatabase.child("users").child(user.getUid()).get  //Todo: fix this
-//            newUser.setUserName(mDatabase.child("users").child(user.getUid()).get());
-            //Log.d( DEBUG_TAG, "MainActivity.onSignInResult: Signed in as: " + user.getEmail() );
+////            mDatabase.child("users").child(user.getUid()).setValue(displayName);
+//
+//            User newUser = User.getInstance();
+//            newUser.setUid(user.getUid());
+////            String username = mDatabase.child("users").child(user.getUid()).get  //Todo: get rid of this if you can
+////            newUser.setUserName(mDatabase.child("users").child(user.getUid()).get());
+//            //Log.d( DEBUG_TAG, "MainActivity.onSignInResult: Signed in as: " + user.getEmail() );
 
             // after a successful sign in, start the job leads management activity
             Intent intent = new Intent( this, MainScreenManagerActivity.class );
