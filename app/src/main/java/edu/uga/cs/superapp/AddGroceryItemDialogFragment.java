@@ -1,5 +1,7 @@
 package edu.uga.cs.superapp;
 
+import static edu.uga.cs.superapp.NewGroceryItemActivity.*;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,10 +14,14 @@ import android.widget.EditText;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 // A DialogFragment class to handle grocery item additions from the grocery list review activity
 // It uses a DialogFragment to allow the input of a new grocery item.
 public class AddGroceryItemDialogFragment extends DialogFragment{
 
+    private final static int id = itemIdForItems;
     private EditText itemNameView;
     private EditText priceView;
     private EditText quantityView;
@@ -71,15 +77,19 @@ public class AddGroceryItemDialogFragment extends DialogFragment{
             String itemName = itemNameView.getText().toString();
             String price = priceView.getText().toString();
             String quantity = quantityView.getText().toString();
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myRef = database.getReference("GroceryList");
+            String id = Integer.toString(itemIdForItems);
 
 //            String url = urlView.getText().toString();
 //            String comments = commentsView.getText().toString();
-            GroceryItem groceryItem = new GroceryItem( itemName, price, quantity);
+            GroceryItem groceryItem = new GroceryItem( itemName, price, quantity, id);
 
             // get the Activity's listener to add the new job lead
             AddGroceryItemDialogListener listener = (AddGroceryItemDialogListener) getActivity();
             // add the new job lead
             listener.onFinishNewGroceryItemDialog( groceryItem );
+            itemIdForItems = itemIdForItems+1;
             // close the dialog
             dismiss();
         }

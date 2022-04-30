@@ -1,7 +1,9 @@
 package edu.uga.cs.superapp;
 
+import static androidx.core.content.ContextCompat.startActivity;
 import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +58,7 @@ public class GroceryListRecyclerAdapter extends RecyclerView.Adapter<GroceryList
         holder.itemName.setText(groceryItem.getItemName());
         holder.price.setText(groceryItem.getPrice());
         holder.quantity.setText(groceryItem.getQuantity());
+        holder.itemId.setText(groceryItem.getItemId());
 
     }
 
@@ -70,6 +73,7 @@ public class GroceryListRecyclerAdapter extends RecyclerView.Adapter<GroceryList
         TextView itemName;
         TextView price;
         TextView quantity;
+        TextView itemId;
         Button editButton;
         Button deleteButton;
         Button addToCart;
@@ -82,6 +86,7 @@ public class GroceryListRecyclerAdapter extends RecyclerView.Adapter<GroceryList
             itemName = (TextView) itemView.findViewById(R.id.itemName);
             price = (TextView) itemView.findViewById(R.id.price);
             quantity = (TextView) itemView.findViewById(R.id.quantity);
+            itemId = (TextView) itemView.findViewById(R.id.ItemId);
             itemView.findViewById(R.id.EditButton).setOnClickListener(view -> {
                 System.out.println(getItemCount());
             });
@@ -89,11 +94,9 @@ public class GroceryListRecyclerAdapter extends RecyclerView.Adapter<GroceryList
 
                 System.out.println(itemName.getText() + " is being removed.");
                 System.out.println(getAdapterPosition()+ " is the adapter position.");
+                delete();
                 adapter.groceryList.remove(getAdapterPosition());
                 adapter.notifyItemRemoved(getAdapterPosition());
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("GroceryList");
-//                delete(getAdapterPosition());
 //                adapter.notifyDataSetChanged();
 
 //                adapter.notifyItemRangeRemoved(getAdapterPosition(),groceryList.size());
@@ -107,19 +110,24 @@ public class GroceryListRecyclerAdapter extends RecyclerView.Adapter<GroceryList
             return this;
         }
 
-        private void delete(int position) {
+        private void delete() {
             // creating a variable for our Database
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference myRef = database.getReference("GroceryList");
 
-//            myRef.child("lists").child(itemName).child(itemsList.get(position).getName()).setValue(itemsList.get(position));
+            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("GroceryList");
 
+
+//            Query query = myRef.child("GroceryList").orderByValue();
+//            myRef.child("lists").child(itemName).child(.get(position).getName()).setValue(itemsList.get(position));
+// (Integer.toString(NewGroceryItemActivity.itemIdForItems-1))
             myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot ) {
                     // remove the value at reference
-                    GroceryItem item = new GroceryItem();
-                    List<GroceryItem> items = new ArrayList<>();
+                    for( DataSnapshot snap: dataSnapshot.getChildren() ) {
+                        myRef.child(itemId.getText().toString()).removeValue();
+                        notifyDataSetChanged();
+                        Log.d( DEBUG_TAG, "ReviewGroceryListActivity.onCreate(): added: " + snap.getRef().toString() );
+                    }
 
                 }
 

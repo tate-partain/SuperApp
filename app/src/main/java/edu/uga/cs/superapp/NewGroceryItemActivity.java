@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class NewGroceryItemActivity extends AppCompatActivity{
 
     public static final String DEBUG_TAG = "NewGroceryItemActivity";
-
+    public static  int itemIdForItems = 0;
     private EditText itemNameView;
     private EditText priceView;
     private EditText quantityView;
@@ -47,19 +47,24 @@ public class NewGroceryItemActivity extends AppCompatActivity{
             String itemName = itemNameView.getText().toString();
             String price = priceView.getText().toString();
             String quantity = quantityView.getText().toString();
-//            String url = urlView.getText().toString();
-//            String comments = commentsView.getText().toString();
-            final GroceryItem groceryItem = new GroceryItem( itemName, price, quantity);
-
-            // Add a new element (GroceryItem) to the list of items in Firebase.
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference myRef = database.getReference("GroceryList");
+ //           String id = myRef.push().getKey();
+//            String url = urlView.getText().toString();
+//            String comments = commentsView.getText().toString();
+            String id = Integer.toString(itemIdForItems);
+            final GroceryItem groceryItem = new GroceryItem( itemName, price, quantity, id);
+
+
+
+            // Add a new element (GroceryItem) to the list of items in Firebase.
+
             // First, a call to push() appends a new node to the existing list (one is created
             // if this is done for the first time).  Then, we set the value in the newly created
             // list node to store the new grocery item.
             // This listener will be invoked asynchronously, as no need for an AsyncTask, as in
             // the previous apps to maintain grocery items.
-            myRef.push().setValue( groceryItem )
+            myRef.child(id).setValue( groceryItem )
                     .addOnSuccessListener( new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
@@ -72,6 +77,9 @@ public class NewGroceryItemActivity extends AppCompatActivity{
                             priceView.setText("");
                             quantityView.setText("");
 //                            commentsView.setText("");
+                            itemIdForItems++;
+                            ;
+
                         }
                     })
                     .addOnFailureListener( new OnFailureListener() {

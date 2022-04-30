@@ -13,17 +13,29 @@ public class GroceryItem {
     private String quantity;
     private String purchasedBy;
 
+    public String getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
+    }
+
+    private String itemId;
+
     public GroceryItem() {
         this.itemName = null;
         this.price = null;
         this.quantity = null;
         this.purchasedBy = null;
+        this.itemId = null;
     }
 
-    public GroceryItem( String itemName, String price, String quantity ) {
+    public GroceryItem( String itemName, String price, String quantity, String itemId ) {
         this.itemName = itemName;
         this.price = price;
         this.quantity = quantity;
+        this.itemId = itemId;
     }
 
     public String getItemName() {
