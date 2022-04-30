@@ -18,6 +18,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -68,7 +69,6 @@ public class ReviewGroceryListActivity
         // get a Firebase DB instance reference
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("GroceryList");
-
         // Set up a listener (event handler) to receive a value for the database reference, but only one time.
         // This type of listener is called by Firebase once by immediately executing its onDataChange method.
         // We can use this listener to retrieve the current list of GroceryItems.
@@ -123,13 +123,12 @@ public class ReviewGroceryListActivity
         // Add a new element (GroceryItem) to the list of items in Firebase.
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("GroceryList");
-        ///int itemId = groceryList.size();
         // First, a call to push() appends a new node to the existing list (one is created
         // if this is done for the first time).  Then, we set the value in the newly created
         // list node to store the new grocery item.
         // This listener will be invoked asynchronously, as no need for an AsyncTask, as in
         // the previous apps to maintain job leads.
-        myRef.push().setValue( groceryItem )
+        myRef.child(groceryItem.getItemId()).setValue( groceryItem )
                 .addOnSuccessListener( new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

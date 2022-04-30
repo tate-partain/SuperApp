@@ -30,7 +30,7 @@
                 android:layout_gravity="start|top"
                 android:layout_height="wrap_content"
                 android:text="ItemName"
-                android:textSize="24sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:padding="5dp"/>
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:autoLink="phone"
                 android:text="Price"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:padding="5dp"/>
@@ -54,17 +54,29 @@
                 android:layout_height="wrap_content"
                 android:autoLink="phone"
                 android:text="Quantity"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:padding="5dp"/>
+
+            <TextView
+                android:id="@+id/ItemId"
+                android:layout_width="225dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|bottom"
+                android:autoLink="phone"
+                android:padding="5dp"
+                android:text="ItemId"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
         <Button
             android:id="@+id/EditButton"
-            android:layout_width="120dp"
-            android:layout_height="35dp"
+            android:layout_width="130dp"
+            android:layout_height="37dp"
             android:text="Edit"
             android:layout_gravity="right|top"
             android:textSize="10sp"
@@ -72,8 +84,8 @@
 
         <Button
             android:id="@+id/DeleteButton"
-            android:layout_width="120dp"
-            android:layout_height="35dp"
+            android:layout_width="130dp"
+            android:layout_height="37dp"
             android:text="Delete"
             android:layout_gravity="right|center"
             android:textSize="10sp"
@@ -81,8 +93,8 @@
 
         <Button
             android:id="@+id/addToCartButton"
-            android:layout_width="120dp"
-            android:layout_height="35dp"
+            android:layout_width="130dp"
+            android:layout_height="37dp"
             android:text="Add to Cart"
             android:layout_gravity="right|center|bottom"
             android:textSize="10sp"
