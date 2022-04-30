@@ -3,12 +3,15 @@ package edu.uga.cs.superapp;
 import static androidx.core.content.ContextCompat.startActivity;
 import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,25 +73,65 @@ public class GroceryListRecyclerAdapter extends RecyclerView.Adapter<GroceryList
     // The adapter must have a ViewHolder class to "hold" one item to show.
     public class GroceryListHolder extends RecyclerView.ViewHolder {
 
-        TextView itemName;
-        TextView price;
-        TextView quantity;
+        EditText itemName;
+        EditText price;
+        EditText quantity;
         TextView itemId;
         Button editButton;
         Button deleteButton;
         Button addToCart;
+        String newName;
+        String newPrice;
+        String newQuan;
         //        TextView comments;
         private GroceryListRecyclerAdapter adapter;
 
         public GroceryListHolder(View itemView) {
             super(itemView);
 
-            itemName = (TextView) itemView.findViewById(R.id.itemName);
-            price = (TextView) itemView.findViewById(R.id.price);
-            quantity = (TextView) itemView.findViewById(R.id.quantity);
+            itemName = (EditText) itemView.findViewById(R.id.itemName);
+            price = (EditText) itemView.findViewById(R.id.price);
+            quantity = (EditText) itemView.findViewById(R.id.quantity);
             itemId = (TextView) itemView.findViewById(R.id.ItemId);
+
+//            Button btnOpenEdit = itemView.findViewById(R.id.EditButton);
+//            btnOpenEdit.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Dialog dialog = new Dialog(getActivity());
+//                    dialog.setContentView(R.layout.edit_items);
+//                    EditText editItems = dialog.findViewById(R.id.EditItemName);
+//                    EditText editPrice = dialog.findViewById(R.id.EditPrice);
+//                    EditText editQuan = dialog.findViewById(R.id.EditQuantity);
+//                    Button saveEdits = dialog.findViewById(R.id.SaveEditsButton);
+//                    saveEdits.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View view) {
+//                            if (!editItems.getText().toString().equals("")) {
+//                                String newItemName = editItems.getText().toString();
+//                            }
+//                            if (!editPrice.getText().toString().equals("")) {
+//                                String newPrice = editPrice.getText().toString();
+//                            }
+//                            if (!editQuan.getText().toString().equals("")) {
+//                                String newQuan = editQuan.getText().toString();
+//                            }
+//
+//
+//                        }
+//                    });
+//                }
+//            });
             itemView.findViewById(R.id.EditButton).setOnClickListener(view -> {
-                System.out.println(getItemCount());
+                newName = itemName.getText().toString();
+                newPrice = price.getText().toString();
+                newQuan = quantity.getText().toString();
+                edit();
+                itemName.setText(newName);
+                price.setText(newPrice);
+                quantity.setText(newQuan);
+                notifyDataSetChanged();
+
             });
             itemView.findViewById(R.id.DeleteButton).setOnClickListener(view -> {
 
@@ -108,7 +151,6 @@ public class GroceryListRecyclerAdapter extends RecyclerView.Adapter<GroceryList
         }
 
         private void delete() {
-            // creating a variable for our Database
             DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("GroceryList");
             myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -128,7 +170,31 @@ public class GroceryListRecyclerAdapter extends RecyclerView.Adapter<GroceryList
             });
         }
 
+        private void edit() {
+            // creating a variable for our Database
+            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("GroceryList");
+            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot ) {
+                    // remove the value at reference
+                    for( DataSnapshot snap: dataSnapshot.getChildren() ) {
+                        myRef.child(itemId.getText().toString()).child("itemName").setValue(newName);
+                        myRef.child(itemId.getText().toString()).child("price").setValue(newPrice);
+                        myRef.child(itemId.getText().toString()).child("quantity").setValue(newQuan);
+                        Log.d( DEBUG_TAG, "ReviewGroceryListActivity.onCreate(): edit: " + snap.getRef().toString() );
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+
     }
+
+
 }
 
 

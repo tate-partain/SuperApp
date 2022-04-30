@@ -24,7 +24,7 @@
             android:layout_height="120dp"
             android:orientation="vertical">
 
-            <TextView
+            <EditText
                 android:id="@+id/itemName"
                 android:layout_width="225dp"
                 android:layout_gravity="start|top"
@@ -35,7 +35,7 @@
                 android:textColor="@color/black"
                 android:padding="5dp"/>
 
-            <TextView
+            <EditText
                 android:id="@+id/price"
                 android:layout_width="225dp"
                 android:layout_gravity="start|center"
@@ -47,7 +47,7 @@
                 android:textColor="@color/black"
                 android:padding="5dp"/>
 
-            <TextView
+            <EditText
                 android:id="@+id/quantity"
                 android:layout_width="225dp"
                 android:layout_gravity="start|center|bottom"
@@ -77,7 +77,7 @@
             android:id="@+id/EditButton"
             android:layout_width="130dp"
             android:layout_height="37dp"
-            android:text="Edit"
+            android:text="Confirm Edit"
             android:layout_gravity="right|top"
             android:textSize="10sp"
             android:padding="5dp"/>

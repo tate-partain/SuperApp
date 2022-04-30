@@ -1,8 +1,11 @@
 package edu.uga.cs.superapp;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -51,6 +54,7 @@ public class ReviewGroceryListActivity
         //listView = findViewById(R.id.list_view);
         groceryList = new ArrayList<GroceryItem>();
         recyclerView = (RecyclerView) findViewById( R.id.recyclerView );
+
 
         FloatingActionButton floatingButton = findViewById(R.id.floatingActionButton);
         floatingButton.setOnClickListener( new View.OnClickListener() {

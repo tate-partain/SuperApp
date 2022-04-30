@@ -89,7 +89,7 @@ public class AddGroceryItemDialogFragment extends DialogFragment{
             AddGroceryItemDialogListener listener = (AddGroceryItemDialogListener) getActivity();
             // add the new job lead
             listener.onFinishNewGroceryItemDialog( groceryItem );
-            itemIdForItems = itemIdForItems+1;
+            itemIdForItems++;
             // close the dialog
             dismiss();
         }
