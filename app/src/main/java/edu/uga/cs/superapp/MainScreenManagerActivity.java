@@ -54,6 +54,7 @@ public class MainScreenManagerActivity extends AppCompatActivity{
         signedInTextView = findViewById( R.id.textView3 );
         signOutButton = findViewById(R.id.signOutButton);
         viewCartButton = findViewById(R.id.button4);
+        settleUpButton = findViewById(R.id.settleUpButton);
 
         addItemButton.setOnClickListener( new AddItemButtonClickListener() );
         reviewListButton.setOnClickListener( new ReviewListButtonClickListener() );
