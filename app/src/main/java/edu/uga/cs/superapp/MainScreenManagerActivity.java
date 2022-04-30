@@ -33,6 +33,7 @@ public class MainScreenManagerActivity extends AppCompatActivity{
     private TextView signedInTextView;
     private Button signOutButton;
     private Button viewCartButton;
+    private Button settleUpButton;
 
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
@@ -58,6 +59,7 @@ public class MainScreenManagerActivity extends AppCompatActivity{
         reviewListButton.setOnClickListener( new ReviewListButtonClickListener() );
         signOutButton.setOnClickListener(new SignOutButtonClickListener());
         viewCartButton.setOnClickListener(new ReviewCartButtonClickListener());
+        settleUpButton.setOnClickListener(new SettleUpButtonClickListener());
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("users");
@@ -169,6 +171,14 @@ public class MainScreenManagerActivity extends AppCompatActivity{
             FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(view.getContext(), MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);//Todo: make sure this prohibits the user from going back but also works
+            view.getContext().startActivity(intent);
+        }
+    }
+
+    private class SettleUpButtonClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(view.getContext(), SettleUpActivity.class);
             view.getContext().startActivity(intent);
         }
     }
