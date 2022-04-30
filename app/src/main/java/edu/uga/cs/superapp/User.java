@@ -13,15 +13,15 @@ import android.os.Bundle;
 public class User {
     private static String id;
     private static double amount;
+    private static String email;
 
     public User() {
-        id = null;
-        amount = 0;
     }
 
-    public User(String id, double amountPaid) {
+    public User(String id, String email, double amountPaid) {
         this.id = id;
         this.amount = amountPaid;
+        this.email = email;
     }
 
     public double getAmount() {
@@ -39,6 +39,10 @@ public class User {
     public void setId(String id) {this.id = id; }
 
     public String getId() { return id; }
+
+    public void setEmail(String email) { this.email = email; }
+
+    public String getEmail() { return email; }
 
     public String toString() {
         return id + " value: " + amount;

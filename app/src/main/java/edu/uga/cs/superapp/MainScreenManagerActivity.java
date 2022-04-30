@@ -88,7 +88,7 @@ public class MainScreenManagerActivity extends AppCompatActivity{
                     }
                     if (isUser == false) { //no user with the current users uid (new user)
                         Log.d(DEBUG_TAG, "No user with specified UID found. Creating new user");
-                        User newUser = new User(currentUser.getUid(), 0);
+                        User newUser = new User(currentUser.getUid(), currentUser.getEmail(), 0);
                         myRef.push().setValue( newUser )
                                 .addOnSuccessListener( new OnSuccessListener<Void>() {
                                     @Override
