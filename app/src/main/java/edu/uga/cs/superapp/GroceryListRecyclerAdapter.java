@@ -97,9 +97,6 @@ public class GroceryListRecyclerAdapter extends RecyclerView.Adapter<GroceryList
                 delete();
                 adapter.groceryList.remove(getAdapterPosition());
                 adapter.notifyItemRemoved(getAdapterPosition());
-//                adapter.notifyDataSetChanged();
-
-//                adapter.notifyItemRangeRemoved(getAdapterPosition(),groceryList.size());
             });
             addToCart = (Button) itemView.findViewById(R.id.addToCartButton);
 
@@ -112,13 +109,7 @@ public class GroceryListRecyclerAdapter extends RecyclerView.Adapter<GroceryList
 
         private void delete() {
             // creating a variable for our Database
-
             DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("GroceryList");
-
-
-//            Query query = myRef.child("GroceryList").orderByValue();
-//            myRef.child("lists").child(itemName).child(.get(position).getName()).setValue(itemsList.get(position));
-// (Integer.toString(NewGroceryItemActivity.itemIdForItems-1))
             myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot ) {
@@ -128,7 +119,6 @@ public class GroceryListRecyclerAdapter extends RecyclerView.Adapter<GroceryList
                         notifyDataSetChanged();
                         Log.d( DEBUG_TAG, "ReviewGroceryListActivity.onCreate(): added: " + snap.getRef().toString() );
                     }
-
                 }
 
                 @Override
