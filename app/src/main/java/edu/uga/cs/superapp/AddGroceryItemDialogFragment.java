@@ -76,6 +76,9 @@ public class AddGroceryItemDialogFragment extends DialogFragment{
         public void onClick(DialogInterface dialog, int which) {
             String itemName = itemNameView.getText().toString();
             String price = priceView.getText().toString();
+            if (price.equals("")) {
+                price = "0.00";
+            }
             String quantity = quantityView.getText().toString();
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference myRef = database.getReference("GroceryList");
