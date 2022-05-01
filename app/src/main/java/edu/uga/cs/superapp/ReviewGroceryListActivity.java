@@ -173,7 +173,6 @@ public class ReviewGroceryListActivity
         super.onPause();
     }
 
-    // These activity callback methods are not needed and are for edational purposes only
     @Override
     protected void onStart() {
         Log.d( DEBUG_TAG, "ReviewGroceryListActivity.onStart()" );
