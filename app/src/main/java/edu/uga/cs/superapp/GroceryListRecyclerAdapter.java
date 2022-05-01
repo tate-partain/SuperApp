@@ -127,11 +127,6 @@ public class GroceryListRecyclerAdapter extends RecyclerView.Adapter<GroceryList
                 newPrice = price.getText().toString();
                 newQuan = quantity.getText().toString();
                 edit();
-                itemName.setText(newName);
-                price.setText(newPrice);
-                quantity.setText(newQuan);
-                notifyDataSetChanged();
-
             });
             itemView.findViewById(R.id.DeleteButton).setOnClickListener(view -> {
 
