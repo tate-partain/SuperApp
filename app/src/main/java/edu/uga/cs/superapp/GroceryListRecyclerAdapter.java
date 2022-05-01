@@ -77,9 +77,6 @@ public class GroceryListRecyclerAdapter extends RecyclerView.Adapter<GroceryList
         EditText price;
         EditText quantity;
         TextView itemId;
-        Button editButton;
-        Button deleteButton;
-        Button addToCart;
         String newName;
         String newPrice;
         String newQuan;
@@ -129,20 +126,40 @@ public class GroceryListRecyclerAdapter extends RecyclerView.Adapter<GroceryList
                 edit();
             });
             itemView.findViewById(R.id.DeleteButton).setOnClickListener(view -> {
-
                 System.out.println(itemName.getText() + " is being removed.");
                 System.out.println(getAdapterPosition()+ " is the adapter position.");
                 delete();
                 adapter.groceryList.remove(getAdapterPosition());
                 adapter.notifyItemRemoved(getAdapterPosition());
             });
-            addToCart = (Button) itemView.findViewById(R.id.addToCartButton);
+            itemView.findViewById(R.id.addToCartButton).setOnClickListener(view -> {
+                addToCart();
+            });
 
         }
-
         public GroceryListHolder linkAdapter(GroceryListRecyclerAdapter adapter) {
             this.adapter = adapter;
             return this;
+        }
+
+        private void addToCart() {
+            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
+            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot ) {
+                    for( DataSnapshot snap: dataSnapshot.getChildren() ) {
+                        myRef.child("GroceryList").child(itemId.getText().toString()).child("itemName").setValue(newName);
+                        myRef.child("GroceryList").child(itemId.getText().toString()).child("price").setValue(newPrice);
+                        myRef.child("GroceryList").child(itemId.getText().toString()).child("quantity").setValue(newQuan);
+                        Log.d( DEBUG_TAG, "ReviewGroceryListActivity.onCreate(): edit: " + snap.getRef().toString() );
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
         }
 
         private void delete() {

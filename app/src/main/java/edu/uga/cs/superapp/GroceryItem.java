@@ -25,7 +25,7 @@ public class GroceryItem {
 
     public GroceryItem() {
         this.itemName = null;
-        this.price = null;
+        this.price = "0.00";
         this.quantity = null;
         this.purchasedBy = null;
         this.itemId = null;
