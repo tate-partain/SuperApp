@@ -14,7 +14,8 @@
         <entry key="app/src/main/res/layout/activity_settle_up.xml" value="0.18840579710144928" />
         <entry key="app/src/main/res/layout/add_grocery_item_dialog.xml" value="0.33619995117187496" />
         <entry key="app/src/main/res/layout/edit_items.xml" value="0.245018115942029" />
-        <entry key="app/src/main/res/layout/grocery_item.xml" value="0.24268646240234376" />
+        <entry key="app/src/main/res/layout/grocery_item.xml" value="0.15966949462890626" />
+        <entry key="app/src/main/res/layout/purchased_item.xml" value="0.12624969482421874" />
       </map>
     </option>
   </component>

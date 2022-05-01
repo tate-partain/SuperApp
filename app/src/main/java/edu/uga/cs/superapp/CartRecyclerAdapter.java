@@ -22,10 +22,6 @@ import java.util.List;
  * This is an adapter class for the RecyclerView to show all grocery items.
  */
 
-//Todo: make sure items deleted from the grocery list are removed from the cart
-    //Todo: items will not be allowed to be deleted or edited from the cart but it does need to update to reflect changes to the cart
-//Todo: create a new layout for cart items since it wont have the same buttons
-
 public class CartRecyclerAdapter extends RecyclerView.Adapter<CartRecyclerAdapter.CartHolder> {
 
     public static final String DEBUG_TAG = "CartRecyclerAdapter";
@@ -40,7 +36,7 @@ public class CartRecyclerAdapter extends RecyclerView.Adapter<CartRecyclerAdapte
 
     @Override
     public CartHolder onCreateViewHolder(ViewGroup parent, int viewType ) {
-        View view = LayoutInflater.from( parent.getContext()).inflate( R.layout.grocery_item, parent, false ); //Todo: this is a grocery item holder but it works for what we need it for
+        View view = LayoutInflater.from( parent.getContext()).inflate( R.layout.purchased_item, parent, false ); //Todo: this is a grocery item holder but it works for what we need it for
         return new CartHolder( view ).linkAdapter(this);
     }
 
@@ -54,6 +50,7 @@ public class CartRecyclerAdapter extends RecyclerView.Adapter<CartRecyclerAdapte
         holder.itemName.setText( groceryItem.getItemName());
         holder.price.setText( groceryItem.getPrice() );
         holder.quantity.setText( groceryItem.getQuantity() );
+        holder.itemId.setText( groceryItem.getItemId());
 //        holder.comments.setText( jobLead.getComments() );
     }
 
@@ -69,8 +66,6 @@ public class CartRecyclerAdapter extends RecyclerView.Adapter<CartRecyclerAdapte
         TextView price;
         TextView quantity;
         TextView itemId;
-        Button editButton;
-        Button deleteButton;
         Button removeFromCart;
         //        TextView comments;
 
@@ -79,21 +74,10 @@ public class CartRecyclerAdapter extends RecyclerView.Adapter<CartRecyclerAdapte
         public CartHolder(View itemView) {
             super(itemView);
 
-            itemName = (TextView) itemView.findViewById(R.id.itemName);
-            price = (TextView) itemView.findViewById(R.id.price);
-            quantity = (TextView) itemView.findViewById(R.id.quantity);
-            itemId = (TextView) itemView.findViewById(R.id.ItemId);
-//            itemView.findViewById(R.id.EditButton).setOnClickListener(view -> {
-//                System.out.println(getItemCount());
-//            });
-//            itemView.findViewById(R.id.DeleteButton).setOnClickListener(view -> {
-//
-//                System.out.println(itemName.getText() + " is being removed.");
-//                System.out.println(getAdapterPosition()+ " is the adapter position.");
-//                delete();
-//                adapter.cart.remove(getAdapterPosition());
-//                adapter.notifyItemRemoved(getAdapterPosition());
-//            });
+            itemName = (TextView) itemView.findViewById(R.id.ItemName2);
+            price = (TextView) itemView.findViewById(R.id.price2);
+            quantity = (TextView) itemView.findViewById(R.id.quantity2);
+            itemId = (TextView) itemView.findViewById(R.id.ItemId2);
             removeFromCart = (Button) itemView.findViewById(R.id.addToCartButton);
 
         }
@@ -103,26 +87,6 @@ public class CartRecyclerAdapter extends RecyclerView.Adapter<CartRecyclerAdapte
             return this;
         }
 
-//        private void delete() {
-//            // creating a variable for our Database
-//            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("GroceryList");
-//            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot dataSnapshot ) {
-//                    // remove the value at reference
-//                    for( DataSnapshot snap: dataSnapshot.getChildren() ) {
-//                        myRef.child(itemId.getText().toString()).removeValue();
-//                        notifyDataSetChanged();
-//                        Log.d( DEBUG_TAG, "ReviewGroceryListActivity.onCreate(): added: " + snap.getRef().toString() );
-//                    }
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                }
-//            });
-//        }
 
     }
 

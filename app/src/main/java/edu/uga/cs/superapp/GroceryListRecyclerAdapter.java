@@ -91,34 +91,6 @@ public class GroceryListRecyclerAdapter extends RecyclerView.Adapter<GroceryList
             quantity = (EditText) itemView.findViewById(R.id.quantity);
             itemId = (TextView) itemView.findViewById(R.id.ItemId);
 
-//            Button btnOpenEdit = itemView.findViewById(R.id.EditButton);
-//            btnOpenEdit.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Dialog dialog = new Dialog(getActivity());
-//                    dialog.setContentView(R.layout.edit_items);
-//                    EditText editItems = dialog.findViewById(R.id.EditItemName);
-//                    EditText editPrice = dialog.findViewById(R.id.EditPrice);
-//                    EditText editQuan = dialog.findViewById(R.id.EditQuantity);
-//                    Button saveEdits = dialog.findViewById(R.id.SaveEditsButton);
-//                    saveEdits.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View view) {
-//                            if (!editItems.getText().toString().equals("")) {
-//                                String newItemName = editItems.getText().toString();
-//                            }
-//                            if (!editPrice.getText().toString().equals("")) {
-//                                String newPrice = editPrice.getText().toString();
-//                            }
-//                            if (!editQuan.getText().toString().equals("")) {
-//                                String newQuan = editQuan.getText().toString();
-//                            }
-//
-//
-//                        }
-//                    });
-//                }
-//            });
             itemView.findViewById(R.id.EditButton).setOnClickListener(view -> {
                 newName = itemName.getText().toString();
                 newPrice = price.getText().toString();
@@ -133,7 +105,18 @@ public class GroceryListRecyclerAdapter extends RecyclerView.Adapter<GroceryList
                 adapter.notifyItemRemoved(getAdapterPosition());
             });
             itemView.findViewById(R.id.addToCartButton).setOnClickListener(view -> {
-                addToCart();
+                newPrice = price.getText().toString();
+                if (!(newPrice.equals("0.00"))) {
+                    adapter.groceryList.remove(getAdapterPosition());
+                    adapter.notifyItemRemoved(getAdapterPosition());
+                    addToCart();
+                } else {
+                    Context context = view.getContext();
+                    CharSequence text = "Add Price";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
             });
 
         }
@@ -143,14 +126,18 @@ public class GroceryListRecyclerAdapter extends RecyclerView.Adapter<GroceryList
         }
 
         private void addToCart() {
-            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
-            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            DatabaseReference cartRef = FirebaseDatabase.getInstance().getReference();
+            DatabaseReference groRef = FirebaseDatabase.getInstance().getReference("GroceryList");
+            GroceryItem groceryItem = new GroceryItem( itemName.getText().toString(), newPrice,
+                    quantity.getText().toString(), itemId.getText().toString());
+
+            cartRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot ) {
                     for( DataSnapshot snap: dataSnapshot.getChildren() ) {
-                        myRef.child("GroceryList").child(itemId.getText().toString()).child("itemName").setValue(newName);
-                        myRef.child("GroceryList").child(itemId.getText().toString()).child("price").setValue(newPrice);
-                        myRef.child("GroceryList").child(itemId.getText().toString()).child("quantity").setValue(newQuan);
+                        cartRef.child("Cart").child(itemId.getText().toString()).setValue(groceryItem);
+                        groRef.child(itemId.getText().toString()).removeValue();
+                        notifyDataSetChanged();
                         Log.d( DEBUG_TAG, "ReviewGroceryListActivity.onCreate(): edit: " + snap.getRef().toString() );
                     }
                 }

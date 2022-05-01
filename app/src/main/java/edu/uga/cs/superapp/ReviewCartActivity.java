@@ -45,19 +45,50 @@ public class ReviewCartActivity
 
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_review_cart );
-
+        cart = new ArrayList<GroceryItem>();
         recyclerView = (RecyclerView) findViewById( R.id.recyclerView2 );
-
         layoutManager = new LinearLayoutManager(this );
         recyclerView.setLayoutManager( layoutManager );
+        recyclerAdapter = new CartRecyclerAdapter( cart );
+        recyclerView.setAdapter( recyclerAdapter );
 
-        cart = Cart.getCart();
+        // get a Firebase DB instance reference
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Cart");
+        // Set up a listener (event handler) to receive a value for the database reference, but only one time.
+        // This type of listener is called by Firebase once by immediately executing its onDataChange method.
+        // We can use this listener to retrieve the current list of GroceryItems.
+        // Other types of Firebase listeners may be set to listen for any and every change in the database
+        // i.e., receive notifications about changes in the data in real time (hence the name, Realtime database).
+        // This listener will be invoked asynchronously, as no need for an AsyncTask, as in the previous apps
+        // to maintain job leads.
+        myRef.addListenerForSingleValueEvent( new ValueEventListener() {
 
-        if (cart.size() != 0) {
-            recyclerAdapter = new CartRecyclerAdapter( cart );
-            recyclerView.setAdapter( recyclerAdapter );
-        }
-        //Todo: add a screen saying the cart is empty
+            @Override
+            public void onDataChange( DataSnapshot snapshot ) {
+                // Once we have a DataSnapshot object, knowing that this is a list,
+                // we need to iterate over the elements and place them on a List.
+//                showData(snapshot);
+                // Now, create a JobLeadRecyclerAdapter to populate a ReceyclerView to display the job leads.
+                for( DataSnapshot postSnapshot: snapshot.getChildren() ) {
+                    GroceryItem groceryItem = postSnapshot.getValue(GroceryItem.class);
+                    cart.add(groceryItem);
+                    Log.d( DEBUG_TAG, "ReviewGroceryListActivity.onCreate(): added: " + groceryItem );
+                }
+                Log.d( DEBUG_TAG, "ReviewGroceryListActivity.onCreate(): setting recyclerAdapter" );
+
+                recyclerAdapter = new CartRecyclerAdapter( cart );
+                recyclerView.setAdapter( recyclerAdapter );
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getMessage());
+            }
+
+
+        } );
     }
 
     @Override

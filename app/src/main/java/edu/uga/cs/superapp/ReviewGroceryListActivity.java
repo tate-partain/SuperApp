@@ -41,7 +41,6 @@ public class ReviewGroceryListActivity
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter recyclerAdapter;
-    private ListView listView;
     private List<GroceryItem> groceryList;
 
     @Override
@@ -51,11 +50,8 @@ public class ReviewGroceryListActivity
 
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_review_grocery_list );
-        //listView = findViewById(R.id.list_view);
         groceryList = new ArrayList<GroceryItem>();
         recyclerView = (RecyclerView) findViewById( R.id.recyclerView );
-
-
         FloatingActionButton floatingButton = findViewById(R.id.floatingActionButton);
         floatingButton.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -109,17 +105,6 @@ public class ReviewGroceryListActivity
         } );
     }
 
-//    private void showData(DataSnapshot snapshot) {
-//        for (DataSnapshot post : snapshot.getChildren()) {
-//            GroceryItem items = post.getValue(GroceryItem.class);
-//            groceryList.add(items);
-//            Log.d( DEBUG_TAG, "ReviewGroceryListActivity.onCreate(): added: " + items );
-//            Log.d( DEBUG_TAG, "ReviewGroceryListActivity.onCreate(): setting recyclerAdapter" );
-//            recyclerAdapter = new GroceryListRecyclerAdapter( groceryList );
-//            recyclerView.setAdapter( recyclerAdapter );
-//
-//        }
-//    }
 
     // this is our own callback for a DialogFragment which adds a new grocery item.
     public void onFinishNewGroceryItemDialog(GroceryItem groceryItem) {
