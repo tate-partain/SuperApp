@@ -1,11 +1,13 @@
 package edu.uga.cs.superapp;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -78,8 +80,34 @@ public class CartRecyclerAdapter extends RecyclerView.Adapter<CartRecyclerAdapte
             price = (TextView) itemView.findViewById(R.id.price2);
             quantity = (TextView) itemView.findViewById(R.id.quantity2);
             itemId = (TextView) itemView.findViewById(R.id.ItemId2);
-            removeFromCart = (Button) itemView.findViewById(R.id.addToCartButton);
+            itemView.findViewById(R.id.Settle).setOnClickListener( view -> {
+                User user = new User();
+                user.addAmount(Double.parseDouble(price.getText().toString()));
+                adapter.cart.remove(getAdapterPosition());
+                adapter.notifyItemRemoved(getAdapterPosition());
+                remove();
+            });
 
+        }
+
+        private void remove() {
+            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Cart");
+            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot ) {
+                    // remove the value at reference
+                    for( DataSnapshot snap: dataSnapshot.getChildren() ) {
+                        myRef.child(itemId.getText().toString()).removeValue();
+                        notifyDataSetChanged();
+                        Log.d( DEBUG_TAG, "ReviewGroceryListActivity.onCreate(): added: " + snap.getRef().toString() );
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
         }
 
         public CartRecyclerAdapter.CartHolder linkAdapter(CartRecyclerAdapter adapter) {

@@ -42,7 +42,7 @@ public class User {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("users");
         User user = new User(id, email, amount);
-        myRef.child("users").child(id).setValue(user);
+        myRef.child(id).setValue(user);
     }
 
     public void resetAmount(String uid) {
@@ -51,7 +51,7 @@ public class User {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("users");
         User user = new User(id, email, amount);
-        myRef.child("users").child(id).setValue(user);
+        myRef.child(id).setValue(user);
     }
 
     public void setId(String id) {this.id = id; }

@@ -41,6 +41,7 @@ public class SettleUpActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             user.resetAmount(user.getId());
+            amountText.setText("0.00");
         }
     }
 }
