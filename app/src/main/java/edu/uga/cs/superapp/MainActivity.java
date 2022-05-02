@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        AppCompatDelegate.setDefaultNightMode( AppCompatDelegate.MODE_NIGHT_YES );
+        AppCompatDelegate.setDefaultNightMode( AppCompatDelegate.MODE_NIGHT_NO );
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -65,8 +65,8 @@ public class MainActivity extends AppCompatActivity {
             Intent signInIntent = AuthUI.getInstance()
                     .createSignInIntentBuilder()
                     .setAvailableProviders(providers)
-                    // this sets our own theme (color scheme, sizing, etc.) for the AuthUI's appearance
-//                    .setTheme(R.style.LoginTheme) //Todo: create style here.
+
+                       .setTheme(R.style.Theme_SuperApp) //Todo: create style here.
                     .build();
             signInLauncher.launch(signInIntent);
         }

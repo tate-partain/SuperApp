@@ -4,18 +4,28 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.19635416666666666" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.14629629629629629" />
-        <entry key="app/src/main/res/layout/activity_main_screen_management.xml" value="0.2242965698242187" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.202" />
+        <entry key="app/src/main/res/drawable/SNRcorners.xml" value="0.202" />
+        <entry key="app/src/main/res/drawable/button.xml" value="0.202" />
+        <entry key="app/src/main/res/drawable/buttonlayout.xml" value="0.202" />
+        <entry key="app/src/main/res/drawable/buttonshape.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/corners.xml" value="0.202" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1405" />
+        <entry key="app/src/main/res/drawable/rsacorners.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/snrcorners.xml" value="0.202" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.33347473144531253" />
+        <entry key="app/src/main/res/layout/activity_main_screen_management.xml" value="0.27872924804687493" />
         <entry key="app/src/main/res/layout/activity_new_grocery_item.xml" value="0.2055252075195312" />
-        <entry key="app/src/main/res/layout/activity_register.xml" value="0.1939498901367187" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.3310134887695312" />
         <entry key="app/src/main/res/layout/activity_review_cart.xml" value="0.20833333333333334" />
-        <entry key="app/src/main/res/layout/activity_review_grocery_list.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_review_grocery_list.xml" value="0.3043533325195313" />
         <entry key="app/src/main/res/layout/activity_review_purchased_list.xml" value="0.1889564336372847" />
-        <entry key="app/src/main/res/layout/activity_settle_up.xml" value="0.18840579710144928" />
+        <entry key="app/src/main/res/layout/activity_settle_up.xml" value="0.3682031603826993" />
         <entry key="app/src/main/res/layout/add_grocery_item_dialog.xml" value="0.33619995117187496" />
         <entry key="app/src/main/res/layout/edit_items.xml" value="0.245018115942029" />
-        <entry key="app/src/main/res/layout/grocery_item.xml" value="0.15966949462890626" />
-        <entry key="app/src/main/res/layout/purchased_item.xml" value="0.12624969482421874" />
+        <entry key="app/src/main/res/layout/grocery_item.xml" value="0.2780014038085938" />
+        <entry key="app/src/main/res/layout/purchased_item.xml" value="0.36370239257812503" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1405" />
       </map>
     </option>
   </component>

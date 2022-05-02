@@ -80,6 +80,7 @@
             android:text="Confirm Edit"
             android:layout_gravity="right|top"
             android:textSize="10sp"
+            android:background="@drawable/buttonshape"
             android:padding="5dp"/>
 
         <Button
@@ -89,6 +90,8 @@
             android:text="Delete"
             android:layout_gravity="right|center"
             android:textSize="10sp"
+            android:background="@drawable/buttonshape"
+
             android:padding="5dp"/>
 
         <Button
@@ -98,6 +101,7 @@
             android:text="Add to Cart"
             android:layout_gravity="right|center|bottom"
             android:textSize="10sp"
+            android:background="@drawable/buttonshape"
             android:padding="5dp"/>
 
     </androidx.cardview.widget.CardView>

@@ -8,50 +8,62 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="32dp"
-        android:padding="10dp"
-        android:text="A simple app to maintain information about job lead prospects"
+        android:layout_width="381dp"
+        android:layout_height="248dp"
+        android:background="@drawable/rsacorners"
+        android:paddingTop="40dp"
+        android:text="Roommate Shopping App! "
+        android:textAlignment="center"
         android:textSize="30sp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.097" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="331dp"
+        android:layout_height="92dp"
+        android:padding="10dp"
+        android:background="@drawable/snrcorners"
+        android:text="Sign in below or Register as a new user."
+        android:textSize="22sp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.258" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="363dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
+        android:layout_height="100dp"
         android:text="Register"
         android:textAllCaps="false"
+        android:textSize="30sp"
+        android:background="@drawable/buttonshape"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button1" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.789" />
 
     <Button
         android:id="@+id/button1"
         android:layout_width="363dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginBottom="32dp"
+        android:layout_height="100dp"
         android:text="Sign in"
         android:textAllCaps="false"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        android:textSize="30sp"
+        android:background="@drawable/buttonshape"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.584" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -80,6 +80,8 @@
             android:layout_height="37dp"
             android:text="Add to balances"
             android:layout_gravity="right|center|bottom"
+            android:background="@drawable/buttonshape"
+
             android:textSize="10sp"
             android:padding="5dp"/>
 

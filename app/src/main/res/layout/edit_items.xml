@@ -38,23 +38,23 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/EditItemName"
-        app:layout_constraintVertical_bias="0.162" />
+        app:layout_constraintVertical_bias="0.207" />
 
     <EditText
         android:id="@+id/EditQuantity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="128dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginBottom="56dp"
         android:ems="10"
         android:hint="Enter quantity"
         android:inputType="text"
         android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/SaveEditsButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EditItemName" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/SaveEditsButton"
@@ -64,6 +64,7 @@
         android:layout_marginEnd="24dp"
         android:text="Save Edits"
         android:textAllCaps="false"
+        android:background="@drawable/buttonshape"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
