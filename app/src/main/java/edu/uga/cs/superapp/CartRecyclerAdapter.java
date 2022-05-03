@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -64,11 +65,13 @@ public class CartRecyclerAdapter extends RecyclerView.Adapter<CartRecyclerAdapte
     // The adapter must have a ViewHolder class to "hold" one item to show.
     public class CartHolder extends RecyclerView.ViewHolder {
 
-        TextView itemName;
-        TextView price;
-        TextView quantity;
+        EditText itemName;
+        EditText price;
+        EditText quantity;
         TextView itemId;
-        Button removeFromCart;
+        String newName;
+        String newPrice;
+        String newQuan;
         //        TextView comments;
 
         private CartRecyclerAdapter adapter;
@@ -76,21 +79,79 @@ public class CartRecyclerAdapter extends RecyclerView.Adapter<CartRecyclerAdapte
         public CartHolder(View itemView) {
             super(itemView);
 
-            itemName = (TextView) itemView.findViewById(R.id.ItemName2);
-            price = (TextView) itemView.findViewById(R.id.price2);
-            quantity = (TextView) itemView.findViewById(R.id.quantity2);
+            itemName = (EditText) itemView.findViewById(R.id.ItemName2);
+            price = (EditText) itemView.findViewById(R.id.price2);
+            quantity = (EditText) itemView.findViewById(R.id.quantity2);
             itemId = (TextView) itemView.findViewById(R.id.ItemId2);
             itemView.findViewById(R.id.Settle).setOnClickListener( view -> {
                 User user = new User();
                 user.addAmount(Double.parseDouble(price.getText().toString()));
                 adapter.cart.remove(getAdapterPosition());
                 adapter.notifyItemRemoved(getAdapterPosition());
-                remove();
+                settle();
             });
+            itemView.findViewById(R.id.EditButton2).setOnClickListener(view -> {
+                newName = itemName.getText().toString();
+                newPrice = price.getText().toString();
+                newQuan = quantity.getText().toString();
+                edit();
+            });
+            itemView.findViewById(R.id.Cancel_Button).setOnClickListener(view -> {
+                adapter.cart.remove(getAdapterPosition());
+                adapter.notifyItemRemoved(getAdapterPosition());
+                cancel();
+            });
+
 
         }
 
-        private void remove() {
+        private void cancel() {
+            DatabaseReference cartRef = FirebaseDatabase.getInstance().getReference();
+            DatabaseReference groRef = FirebaseDatabase.getInstance().getReference("Cart");
+            GroceryItem groceryItem = new GroceryItem( itemName.getText().toString(), price.getText().toString(),
+                    quantity.getText().toString(), itemId.getText().toString());
+
+            cartRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot ) {
+                    for( DataSnapshot snap: dataSnapshot.getChildren() ) {
+                        cartRef.child("GroceryList").child(itemId.getText().toString()).setValue(groceryItem);
+                        groRef.child(itemId.getText().toString()).removeValue();
+                        notifyDataSetChanged();
+                        Log.d( DEBUG_TAG, "ReviewGroceryListActivity.onCreate(): edit: " + snap.getRef().toString() );
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+
+        private void edit() {
+            // creating a variable for our Database
+            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Cart");
+            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot ) {
+                    // remove the value at reference
+                    for( DataSnapshot snap: dataSnapshot.getChildren() ) {
+                        myRef.child(itemId.getText().toString()).child("itemName").setValue(newName);
+                        myRef.child(itemId.getText().toString()).child("price").setValue(newPrice);
+                        myRef.child(itemId.getText().toString()).child("quantity").setValue(newQuan);
+                        Log.d( DEBUG_TAG, "ReviewGroceryListActivity.onCreate(): edit: " + snap.getRef().toString() );
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+
+        private void settle() {
             DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Cart");
             myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
