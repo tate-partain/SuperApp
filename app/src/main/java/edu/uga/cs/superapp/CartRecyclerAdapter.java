@@ -89,17 +89,32 @@ public class CartRecyclerAdapter extends RecyclerView.Adapter<CartRecyclerAdapte
                 adapter.cart.remove(getAdapterPosition());
                 adapter.notifyItemRemoved(getAdapterPosition());
                 settle();
+                Context context = view.getContext();
+                CharSequence text = "Added to Balances";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
             });
             itemView.findViewById(R.id.EditButton2).setOnClickListener(view -> {
                 newName = itemName.getText().toString();
                 newPrice = price.getText().toString();
                 newQuan = quantity.getText().toString();
                 edit();
+                Context context = view.getContext();
+                CharSequence text = "Edited";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
             });
             itemView.findViewById(R.id.Cancel_Button).setOnClickListener(view -> {
                 adapter.cart.remove(getAdapterPosition());
                 adapter.notifyItemRemoved(getAdapterPosition());
                 cancel();
+                Context context = view.getContext();
+                CharSequence text = "Purchase Cancelled";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
             });
 
 

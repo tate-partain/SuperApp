@@ -96,6 +96,11 @@ public class GroceryListRecyclerAdapter extends RecyclerView.Adapter<GroceryList
                 newPrice = price.getText().toString();
                 newQuan = quantity.getText().toString();
                 edit();
+                Context context = view.getContext();
+                CharSequence text = "Edited";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
             });
             itemView.findViewById(R.id.DeleteButton).setOnClickListener(view -> {
                 System.out.println(itemName.getText() + " is being removed.");
@@ -103,6 +108,11 @@ public class GroceryListRecyclerAdapter extends RecyclerView.Adapter<GroceryList
                 delete();
                 adapter.groceryList.remove(getAdapterPosition());
                 adapter.notifyItemRemoved(getAdapterPosition());
+                Context context = view.getContext();
+                CharSequence text = "Deleted";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
             });
             itemView.findViewById(R.id.addToCartButton).setOnClickListener(view -> {
                 newPrice = price.getText().toString();
@@ -110,6 +120,11 @@ public class GroceryListRecyclerAdapter extends RecyclerView.Adapter<GroceryList
                     adapter.groceryList.remove(getAdapterPosition());
                     adapter.notifyItemRemoved(getAdapterPosition());
                     addToCart();
+                    Context context = view.getContext();
+                    CharSequence text = "Added to Cart";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
                 } else {
                     Context context = view.getContext();
                     CharSequence text = "Add Price";
